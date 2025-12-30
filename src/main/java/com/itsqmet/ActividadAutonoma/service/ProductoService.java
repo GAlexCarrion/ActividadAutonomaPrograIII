@@ -1,8 +1,8 @@
 package com.itsqmet.ActividadAutonoma.service;
 
 
-import com.itsqmet.tienda_app.entity.Producto;
-import com.itsqmet.tienda_app.repository.ProductoRepository;
+import com.itsqmet.ActividadAutonoma.entity.Producto;
+import com.itsqmet.ActividadAutonoma.repository.ProductoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.util.List;

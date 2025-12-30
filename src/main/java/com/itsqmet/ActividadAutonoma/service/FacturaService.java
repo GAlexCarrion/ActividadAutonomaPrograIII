@@ -1,8 +1,8 @@
 package com.itsqmet.ActividadAutonoma.service;
 
 
-import com.itsqmet.tienda_app.entity.Factura;
-import com.itsqmet.tienda_app.repository.FacturaRepository;
+import com.itsqmet.ActividadAutonoma.entity.Factura;
+import com.itsqmet.ActividadAutonoma.repository.FacturaRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.util.List;

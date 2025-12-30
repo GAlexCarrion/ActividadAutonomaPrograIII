@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <title>TechPro - Gestión de Tienda</title>
+    <link rel="icon" type="image/png" th:href="@{/imgs/logoEmpresa.png}" />
+</head>
+
+<body class="bg-slate-900 text-slate-200">
+
+<header class="lg:px-16 px-6 flex flex-wrap items-center py-6 bg-slate-800 border-b border-slate-700 shadow-xl">
+    <div class="flex-1 flex justify-between items-center">
+        <a th:href="@{/}" class="text-3xl text-cyan-400 font-black tracking-tighter">TECH<span class="text-slate-100">PRO</span></a>
+    </div>
+
+    <div class="md:flex md:items-center md:w-auto w-full" id="menu">
+        <nav>
+            <ul class="md:flex items-center justify-between text-sm font-medium pt-4 md:pt-0">
+                <li><a class="md:p-4 py-3 px-2 block hover:text-cyan-400 transition" th:href="@{/}">Inicio</a></li>
+                <li><a class="md:p-4 py-3 px-2 block hover:text-cyan-400 transition" th:href="@{/proveedor/lista}">Proveedores</a></li>
+                <li><a class="md:p-4 py-3 px-2 block hover:text-cyan-400 transition" th:href="@{/producto/lista}">Productos</a></li>
+                <li><a class="md:p-4 py-3 px-2 block hover:text-cyan-400 transition" th:href="@{/cliente/lista}">Clientes</a></li>
+                <li><a class="md:p-4 py-3 px-2 block bg-cyan-600 text-white rounded-lg hover:bg-cyan-500 transition" th:href="@{/factura/lista}">Facturación</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<div class="relative w-full h-[60vh] flex items-center justify-center overflow-hidden bg-slate-950">
+    <div class="absolute inset-0 opacity-40 bg-[url('https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80')] bg-cover bg-center"></div>
+
+    <div class="relative z-10 text-center">
+        <h1 class="text-6xl font-black text-white uppercase tracking-widest mb-2">Sistema de Gestión</h1>
+        <p class="text-xl text-cyan-400 font-light tracking-wide">Eficiencia y Control en cada transacción</p>
+    </div>
+</div>
+
+<div class="container mx-auto px-4 py-12">
+    <h2 class="text-3xl font-bold mb-8 border-l-4 border-cyan-500 pl-4">Catálogo de Inventario</h2>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+
+        <div th:each="product : ${productos}"
+             class="group bg-slate-800 rounded-2xl overflow-hidden border border-slate-700 hover:border-cyan-500/50 transition-all duration-300 shadow-lg">
+
+            <div class="relative h-48 flex items-center justify-center bg-slate-700/30 p-6">
+                <img class="max-h-full transition-transform duration-500 group-hover:scale-110"
+                     th:src="@{${product.rutaImagen}}" alt="Producto">
+            </div>
+
+            <div class="p-6">
+                <h3 th:text="${product.nombre}" class="text-lg font-bold text-white mb-1"></h3>
+                <div class="flex justify-between items-center">
+                    <span th:text="${product.proveedor.nombre}" class="text-sm text-slate-400"></span>
+                    <span th:text="'$' + ${product.precioUnitario}"
+                          class="text-cyan-400 font-mono font-bold text-lg"></span>
+                </div>
+
+                <a th:href="@{/producto/lista}" class="mt-4 block text-center py-2 bg-slate-700 text-xs uppercase tracking-wider font-bold rounded hover:bg-slate-600 transition">Ver Detalles</a>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>

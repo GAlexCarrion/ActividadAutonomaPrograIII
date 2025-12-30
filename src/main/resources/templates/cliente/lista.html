@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>TechPro - Lista Clientes</title>
+    <link rel="icon" type="image/png" th:href="@{/imgs/logoEmpresa.png}" />
+    <link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined" rel="stylesheet">
+</head>
+<body class="bg-slate-900 text-slate-200">
+
+<header class="lg:px-16 px-6 flex flex-wrap items-center py-6 bg-slate-800 border-b border-slate-700 shadow-xl">
+    <div class="flex-1 flex justify-between items-center">
+        <a th:href="@{/}" class="text-3xl text-cyan-400 font-black tracking-tighter">TECH<span class="text-slate-100">PRO</span></a>
+    </div>
+    <nav class="hidden md:flex items-center space-x-4 text-sm font-medium">
+        <a class="hover:text-cyan-400 transition" th:href="@{/}">Inicio</a>
+        <a class="hover:text-cyan-400 transition" th:href="@{/cliente/formulario}">Nuevo Cliente</a>
+        <a class="bg-cyan-600 text-white px-4 py-2 rounded-lg hover:bg-cyan-500 transition" th:href="@{/cliente/lista}">Clientes</a>
+    </nav>
+</header>
+
+<div class="flex flex-col items-center justify-start min-h-screen pt-12 px-4">
+    <div class="w-full max-w-6xl">
+        <h1 class="mb-8 text-4xl font-black text-white text-center tracking-tight border-b border-slate-700 pb-4">
+            Gestión de <span class="text-cyan-400">Clientes</span>
+        </h1>
+
+        <div class="overflow-hidden rounded-xl bg-slate-800 shadow-2xl border border-slate-700">
+            <table class="w-full text-left border-collapse">
+                <thead class="bg-slate-700/50 text-cyan-400 uppercase text-xs font-bold">
+                <tr>
+                    <th class="p-4">Nombre Completo</th>
+                    <th class="p-4">Cédula</th>
+                    <th class="p-4">Fecha Nacimiento</th>
+                    <th class="p-4">Generar Factura</th>
+                    <th class="p-4 text-center">Acciones</th>
+                </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-700">
+                <tr th:each="cliente : ${clientes}" class="hover:bg-slate-700/30 transition-colors">
+                    <td class="p-4">
+                        <div class="font-bold text-white" th:text="${cliente.nombre}"></div>
+                        <div class="text-xs text-slate-400" th:text="${cliente.apellido}"></div>
+                    </td>
+                    <td class="p-4 font-mono text-cyan-500" th:text="${cliente.cedula}"></td>
+                    <td class="p-4 text-slate-300 text-sm" th:text="${cliente.fechaNacimiento}"></td>
+                    <td class="p-4">
+                        <form th:action="@{/factura/formulario}" method="get" class="flex items-center gap-2">
+                            <input type="hidden" name="cedula" th:value="${cliente.cedula}" />
+                            <select name="productoId" class="bg-slate-900 border border-slate-600 text-xs text-white rounded-md p-2 focus:ring-cyan-500">
+                                <option th:each="producto : ${productos}" th:value="${producto.id}" th:text="${producto.nombre}"></option>
+                            </select>
+                            <button type="submit" class="p-2 bg-cyan-600 hover:bg-cyan-500 text-white rounded-md transition">
+                                <i class="material-icons-outlined text-sm">receipt_long</i>
+                            </button>
+                        </form>
+                    </td>
+                    <td class="p-4 text-center">
+                        <div class="flex justify-center space-x-3">
+                            <a th:href="@{/cliente/actualizar/}+${cliente.cedula}" class="text-slate-400 hover:text-cyan-400 transition">
+                                <i class="material-icons-outlined">edit</i>
+                            </a>
+                            <a th:href="@{/cliente/eliminar/}+${cliente.cedula}" class="text-slate-400 hover:text-red-400 transition">
+                                <i class="material-icons-outlined">delete</i>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+</body>
+</html>
